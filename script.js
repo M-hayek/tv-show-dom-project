@@ -1,8 +1,30 @@
 //You can edit ALL of the code here
 function setup() {
+
   const allEpisodes = getAllEpisodes();
   makePageForEpisodes(allEpisodes);
-}
+
+  let searachEngin = document.querySelector ("#search-input");
+  searachEngin.addEventListener ("keyup", searchEpisodes);
+  }
+
+  function searchEpisodes () {
+    const allEpisodes = getAllEpisodes();
+        let filteredEpisodes = allEpisodes.filter (filterEpisodes);
+        console.log(filteredEpisodes);
+   }
+
+  function filterEpisodes(episode) {
+    let searchEngine= document.queryselector ("#search-input");
+  console.log(searchEngine.value);
+   if (episode.name.toLowercase().includes(searchEngine.value.toLowercase())){
+     return true;
+   } else {
+     return false;
+   }
+  }
+  
+
 
 const rootElem = document.getElementById("root");
 
@@ -24,29 +46,30 @@ function createCard(episode) {
   card.appendChild (episodeName);
   episodeName.innerText = episode.name;
 
-  let episodeCode = document.createElement ("p");
+  let episodeCode = document.createElement ("h5");
   card.appendChild (episodeCode);
-  episodeCode.innerText = "S0" + episode.season + "E0" + episode.number;
+  let seasonPadding = "";
+  if(episode.season < 10) {
+    seasonPadding = "0";
+  }
+  let codeText =  "S" + seasonPadding + episode.season;
+  episodeCode.innerText = codeText + "E0" + episode.number;
 
   
   let episodeImage = document.createElement ("img");
   card.appendChild (episodeImage);
   episodeImage.src = episode.image.medium;
 
-  let episodeSummary = document.createElement ("p");
+  let episodeSummary = document.createElement ("span");
   card.appendChild (episodeSummary);
-  episodeSummary.innerText = episode.summary;
+  episodeSummary.innerHTML = episode.summary;
 
       // console.log(epsiode.name);
    // console.log(epsiode.image.medium);
  
  }
 
- function searchElement (epsiodeList) {
-   let e
-  episodeList.forEach (searchEngine);
- }
- 
+
 
 
 
